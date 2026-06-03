@@ -1,0 +1,56 @@
+<section class="page-enter">
+
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon">
+        </button>
+        <div class="d-flex justify-content-between align-items-center flex-grow-1">
+            <h2 class="section-title mb-0">Marcas</h2>
+            <span class="text-muted small"><?= count($brands) ?> marcas</span>
+        </div>
+    </div>
+
+    <?php if(empty($brands)): ?>
+        <div class="text-center py-5">
+            <i class="bi bi-inbox fs-1 text-muted"></i>
+            <p class="text-muted mt-2">No hay marcas registradas aún.</p>
+        </div>
+    <?php else: ?>
+
+        <section>
+            <div class="container-cards">
+                <div class="products-grid">
+
+                    <?php foreach($brands as $brand): ?>
+
+                        <?php
+                            $img = (!empty($brand['foto']))
+                                ? BASE_URL . $brand['foto']
+                                : BASE_URL . 'img/brands/default.jpg';
+                        ?>
+
+                        <article class="card card-product">
+
+                            <div class="card-img-wrapper">
+                                <img src="<?= $img ?>" class="card-img" alt="<?= htmlspecialchars($brand['nombre']) ?>">
+                            </div>
+
+                            <div class="card-body">
+                                <h3 class="card-title"><?= htmlspecialchars($brand['nombre']) ?></h3>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="index.php?controller=brand&action=show&id=<?= $brand['id'] ?>" class="btn-anima-outline">Ver productos</a>
+                            </div>
+
+                        </article>
+
+                    <?php endforeach; ?>
+
+                </div>
+            </div>
+        </section>
+
+    <?php endif; ?>
+
+</section>

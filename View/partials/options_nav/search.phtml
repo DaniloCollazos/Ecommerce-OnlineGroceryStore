@@ -1,0 +1,16 @@
+<?php if(!$esAdmin): ?>
+    <form action="<?= BASE_URL ?>index.php" method="GET" class="nav-search" role="search">
+        <input type="hidden" name="controller" value="search">
+        <input type="hidden" name="action" value="index">
+        <input
+            type="text"
+            name="q"
+            placeholder="Busca tus productos favoritos…"
+            value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
+            aria-label="Buscar productos"
+        >
+        <button type="submit" class="nav-search-submit" aria-label="Buscar">
+            <img src="<?= BASE_URL ?>icons/lupa.png" alt="Buscar" class="nav-search-icon">
+        </button>
+    </form>
+<?php endif; ?>

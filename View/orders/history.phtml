@@ -1,0 +1,70 @@
+<?php
+/**
+ * Vista Historial de Pedidos — AnimaMarket
+ * Ruta: View/orders/history.phtml
+ */
+?>
+
+<div class="page-enter">
+
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon"> Volver
+        </button>
+        <h2 class="section-title mb-0">
+            <i class="bi bi-clock-history"></i> Mis Pedidos
+        </h2>
+    </div>
+
+    <?php if(empty($orders)): ?>
+        <div class="text-center py-5">
+            <i class="bi bi-receipt fs-1 text-muted"></i>
+            <p class="text-muted mt-2">Aún no tienes pedidos realizados.</p>
+            <a href="<?= BASE_URL ?>index.php?controller=product&action=index"
+               class="btn btn-primary mt-2">
+                Ir a comprar
+            </a>
+        </div>
+    <?php else: ?>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th># Pedido</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($orders as $order): ?>
+                <tr>
+                    <td><strong>#<?= $order['id'] ?></strong></td>
+                    <td>
+                        <small><?= date('d/m/Y H:i', strtotime($order['fecha'])) ?></small>
+                    </td>
+                    <td class="fw-bold">
+                        $<?= number_format($order['total'], 0, ',', '.') ?>
+                    </td>
+                    <td>
+                        <?php
+                        $estadoClass = match($order['estado'] ?? '') {
+                            'pendiente' => 'bg-warning text-dark',
+                            'pagado'    => 'bg-success',
+                            'cancelado' => 'bg-danger',
+                            default     => 'bg-secondary'
+                        };
+                        ?>
+                        <span class="badge <?= $estadoClass ?>">
+                            <?= ucfirst($order['estado'] ?? 'pendiente') ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php endif; ?>
+</div>

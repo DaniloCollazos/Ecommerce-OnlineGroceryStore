@@ -1,0 +1,106 @@
+<?php
+/**
+ * Vista Login — AnimaMarket
+ *
+ * Vista standalone — no usa main.phtml porque tiene su propio diseño de pantalla completa.
+ * Animación de paneles manejada por public/js/login.js
+ */
+
+$error    = $_GET['error']    ?? '';
+$registro = $_GET['registro'] ?? '';
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar · <?= APP_NAME ?></title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
+</head>
+<body class="login-body">
+
+<main>
+    <div class="auth-back-wrap">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon"> Volver
+        </button>
+    </div>
+
+    <div class="contenedor_todo" id="contenedor">
+
+        <!-- Paneles de fondo animados -->
+        <div class="caja_trasera">
+            <div class="caja_trasera-login">
+                <h3>¿Ya tienes cuenta?</h3>
+                <p>Inicia sesión para ver tu carrito y pedidos</p>
+                <button id="btn_iniciar-sesion">Iniciar Sesión</button>
+            </div>
+            <div class="caja_trasera-register">
+                <h3>¿Eres nuevo?</h3>
+                <p>Regístrate y empieza a comprar en <?= APP_NAME ?></p>
+                <button id="btn_registrarse">Regístrate</button>
+            </div>
+        </div>
+
+        <!-- Formularios -->
+        <div class="contenedor_login-register">
+
+            <!-- LOGIN -->
+            <form class="formulario_login"
+                  method="POST"
+                  action="<?= BASE_URL ?>index.php?controller=Auth&action=loginPost">
+
+                <h2>Iniciar Sesión</h2>
+
+                <?php if($error === 'credenciales'): ?>
+                    <p class="msg-error">Email o contraseña incorrectos</p>
+                <?php elseif($error === 'campos_vacios'): ?>
+                    <p class="msg-error">Completa todos los campos</p>
+                <?php endif; ?>
+
+                <?php if($registro === 'exitoso'): ?>
+                    <p class="msg-success">¡Registro exitoso! Ya puedes ingresar</p>
+                <?php endif; ?>
+
+                <input type="email"    name="email"
+                       placeholder="Correo electrónico" required>
+                <input type="password" name="password"
+                       placeholder="Contraseña" required>
+
+                <button type="submit">Entrar</button>
+
+            </form>
+
+            <!-- REGISTRO -->
+            <form class="formulario_register"
+                  method="POST"
+                  action="<?= BASE_URL ?>index.php?controller=Auth&action=registerPost">
+
+                <h2>Crear Cuenta</h2>
+
+                <?php if($error === 'email_existe'): ?>
+                    <p class="msg-error">Este correo ya está registrado</p>
+                <?php elseif($error === 'campos_vacios'): ?>
+                    <p class="msg-error">Completa todos los campos</p>
+                <?php endif; ?>
+
+                <input type="text"     name="nombre"
+                       placeholder="Nombre completo" required>
+                <input type="email"    name="email"
+                       placeholder="Correo electrónico" required>
+                <input type="tel"      name="telefono"
+                       placeholder="Teléfono (opcional)">
+                <input type="password" name="password"
+                       placeholder="Contraseña" required minlength="6">
+
+                <button type="submit">Registrarme</button>
+
+            </form>
+
+        </div>
+    </div>
+</main>
+
+<script src="<?= BASE_URL ?>js/login.js"></script>
+</body>
+</html>

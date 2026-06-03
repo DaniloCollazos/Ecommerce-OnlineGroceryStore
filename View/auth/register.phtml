@@ -1,0 +1,84 @@
+<?php
+/**
+ * Vista Registro independiente — AnimaMarket
+ *
+ * Vista alternativa de registro con diseño propio,
+ * para acceder directamente sin pasar por login.
+ */
+
+$error = $_GET['error'] ?? '';
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro · <?= APP_NAME ?></title>
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
+</head>
+
+<body class="login-body">
+
+<main>
+    <div class="auth-back-wrap">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon"> Volver
+        </button>
+    </div>
+
+    <div class="contenedor_todo">
+
+        <!-- CARD REGISTRO -->
+        <div class="auth-card">
+
+            <h2 class="auth-title">
+                Crear Cuenta
+            </h2>
+
+            <?php if($error === 'email_existe'): ?>
+                <p class="msg-error">Este correo ya está registrado</p>
+            <?php elseif($error === 'campos_vacios'): ?>
+                <p class="msg-error">Completa todos los campos obligatorios</p>
+            <?php endif; ?>
+
+            <form method="POST"
+                  action="<?= BASE_URL ?>index.php?controller=Auth&action=registerPost"
+                  class="auth-form">
+
+                <input type="text" name="nombre"
+                       placeholder="Nombre completo" required
+                       class="auth-input">
+
+                <input type="email" name="email"
+                       placeholder="Correo electrónico" required
+                       class="auth-input">
+
+                <input type="tel" name="telefono"
+                       placeholder="Teléfono (opcional)"
+                       class="auth-input">
+
+                <input type="password" name="password"
+                       placeholder="Contraseña" required minlength="6"
+                       class="auth-input">
+
+                <button type="submit" class="btn-auth">
+                    Registrarme
+                </button>
+
+            </form>
+
+            <p class="auth-footer">
+                ¿Ya tienes cuenta?
+                <a href="<?= BASE_URL ?>index.php?controller=Auth&action=login">
+                    Inicia sesión
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

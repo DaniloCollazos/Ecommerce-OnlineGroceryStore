@@ -1,0 +1,118 @@
+<?php
+/**
+ * Vista Checkout — AnimaMarket
+ * Stepper animado + resumen del pedido + método de pago.
+ */
+?>
+
+<div class="page-enter">
+
+    <!-- BOTÓN VOLVER -->
+    <div class="mb-3">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon"> Volver
+        </button>
+    </div>
+
+    <!-- STEPPER ANIMADO -->
+    <div class="checkout-stepper mb-5">
+        <div class="step done">   <span>1</span> Carrito  </div>
+        <div class="step active"> <span>2</span> Confirmar</div>
+        <div class="step">        <span>3</span> Listo    </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- DETALLE DEL PEDIDO -->
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">
+                        <i class="bi bi-receipt"></i> Detalle del pedido
+                    </h5>
+
+                    <?php foreach($cartItems as $item): ?>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <strong><?= htmlspecialchars($item['producto'] ?? '') ?></strong>
+                            <br>
+                            <small class="text-muted">
+                                <?= $item['cantidad'] ?> ×
+                                $<?= number_format($item['precio'], 0, ',', '.') ?>
+                            </small>
+                        </div>
+                        <strong>
+                            $<?= number_format($item['cantidad'] * $item['precio'], 0, ',', '.') ?>
+                        </strong>
+                    </div>
+                    <?php endforeach; ?>
+
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total</strong>
+                        <strong class="text-primary fs-5">
+                            $<?= number_format($order['total'], 0, ',', '.') ?>
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÉTODO DE PAGO -->
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">
+                        <i class="bi bi-credit-card"></i> Método de pago
+                    </h5>
+
+                    <form method="POST"
+                          action="<?= BASE_URL ?>index.php?controller=payment&action=store">
+
+                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+
+                        <div class="mb-3">
+                            <div class="form-check payment-option mb-2">
+                                <input class="form-check-input" type="radio"
+                                       name="metodo" value="efectivo"
+                                       id="efectivo" checked>
+                                <label class="form-check-label" for="efectivo">
+                                    <i class="bi bi-cash"></i> Efectivo contra entrega
+                                </label>
+                            </div>
+                            <div class="form-check payment-option mb-2">
+                                <input class="form-check-input" type="radio"
+                                       name="metodo" value="transferencia"
+                                       id="transferencia">
+                                <label class="form-check-label" for="transferencia">
+                                    <i class="bi bi-bank"></i> Transferencia bancaria
+                                </label>
+                            </div>
+                            <div class="form-check payment-option">
+                                <input class="form-check-input" type="radio"
+                                       name="metodo" value="nequi"
+                                       id="nequi">
+                                <label class="form-check-label" for="nequi">
+                                    <i class="bi bi-phone"></i> Nequi / Daviplata
+                                </label>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <p class="text-muted small">
+                            <i class="bi bi-person-circle"></i>
+                            Pedido para:
+                            <strong><?= htmlspecialchars($user['nombre'] ?? '') ?></strong>
+                        </p>
+
+                        <button type="submit" class="btn btn-success w-100 btn-lg mt-2">
+                            <i class="bi bi-check-circle"></i> Confirmar pedido
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<?php
+/**
+ * Partial Carousel — AnimaMarket
+ * Carrusel de portada con imágenes y categorías destacadas.
+ * Se incluye en products/index.phtml y otras vistas del cliente.
+ */
+?>
+
+<div class="container-carousel">
+    <div id="carouselHome" class="carousel">
+
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <button class="active" data-slide="0"></button>
+            <button data-slide="2"></button>
+        </div>
+
+        <!-- Track (contenedor interno de slides) -->
+        <div class="carousel-track">
+
+            <div class="carousel-item active">
+                <img src="<?= BASE_URL ?>img/1_carousel.jpg"
+                    class="carousel-img" alt="Tienda">
+                <div class="carousel-caption">
+                    <h5>Bienvenido a <?= APP_NAME ?></h5>
+                    <p>Tus abarrotes favoritos con animaciones únicas</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="<?= BASE_URL ?>img/2_carousel.jpg"
+                    class="carousel-img" alt="Granos">
+                <div class="carousel-caption">
+                    <h5>Granos y Cereales</h5>
+                    <p>Selecciona la cantidad y mira la magia</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="<?= BASE_URL ?>img/3_carousel.jpeg"
+                    class="carousel-img" alt="Más productos">
+                <div class="carousel-caption">
+                    <h5>Todo en un solo lugar</h5>
+                    <p>Entrega rápida a tu puerta</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Botones -->
+        <button class="carousel-control-prev" data-action="prev">
+            &#10094;
+        </button>
+
+        <button class="carousel-control-next" data-action="next">
+            &#10095;
+        </button>
+
+    </div>
+</div>
+
+<script src="<?= BASE_URL ?>js/carousel.js"></script>

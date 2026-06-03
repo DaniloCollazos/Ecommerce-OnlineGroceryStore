@@ -1,0 +1,56 @@
+<?php
+/**
+ * Vista Perfil de Usuario — AnimaMarket
+ */
+$user = currentUser();
+?>
+
+<div class="page-enter">
+
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon"> Volver
+        </button>
+        <h2 class="section-title mb-0">
+            <i class="bi bi-person-circle"></i> Mi Perfil
+        </h2>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-4">
+                <i class="bi bi-person-circle display-1 text-muted"></i>
+                <h5 class="mt-3"><?= htmlspecialchars($user['nombre'] ?? '') ?></h5>
+                <span class="badge <?= isAdmin() ? 'bg-danger' : 'bg-primary' ?>">
+                    <?= isAdmin() ? 'Administrador' : 'Cliente' ?>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Accesos rápidos</h5>
+
+                    <div class="d-grid gap-2">
+                        <a href="<?= BASE_URL ?>index.php?controller=order&action=index"
+                           class="btn btn-outline-primary">
+                            <i class="bi bi-receipt"></i> Ver mis pedidos
+                        </a>
+                        <a href="<?= BASE_URL ?>index.php?controller=address&action=index"
+                           class="btn btn-outline-secondary">
+                            <i class="bi bi-geo-alt"></i> Mis direcciones
+                        </a>
+                        <a href="<?= BASE_URL ?>index.php?controller=Auth&action=logout"
+                           class="btn btn-outline-danger">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

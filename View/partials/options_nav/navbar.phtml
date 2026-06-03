@@ -1,0 +1,102 @@
+<?php
+/**
+ * Navegación secundaria (fila inferior del header).
+ */
+
+$esAdmin = isAdmin();
+$categorias = $categorias ?? [];
+$marcas = $marcas ?? [];
+?>
+
+<nav class="navbar <?= $esAdmin ? 'navbar' : 'navbar' ?>">
+    <div class="navbar-group navbar-group--menu">
+
+    <!-- Menú de navegación de Admin -->
+        <?php if($esAdmin): ?>
+            <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=home&action=index">Ver tienda</a>
+            <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=product&action=indexAdmin">Productos</a>
+
+            <div class="dropdown">
+                <button class="dropdown-toggle nav-link" type="button" aria-expanded="false" aria-haspopup="true">
+                    Catálogo
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=category&action=index">Categorías</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=brand&action=index">Marcas</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=provider&action=index">Proveedores</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=inventory&action=index">Inventario</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-toggle nav-link" type="button" aria-expanded="false" aria-haspopup="true">
+                    Operación
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=user&action=index">Usuarios</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=order&action=index">Pedidos</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=payment&action=index">Pagos</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=sale&action=index">Ventas</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=role&action=index">Roles</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-toggle nav-link" type="button" aria-expanded="false" aria-haspopup="true">
+                    Reportes / Configuración
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=admin&action=dashboard">Dashboard</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=admin&action=reports">Reportes</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=admin&action=analytics">Análisis</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>index.php?controller=admin&action=settings">Ajustes</a></li>
+                </ul>
+            </div>
+
+        <!-- Menú de navegación de Cliente e Invitado -->
+        <?php else: ?>
+
+            <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=product&action=index">Todos</a>
+
+            <?php if(!empty($categorias)): ?>
+                <div class="dropdown">
+                    <button class="dropdown-toggle nav-link" type="button" aria-expanded="false" aria-haspopup="true">
+                        Categorías
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <?php foreach($categorias as $categoria): ?>
+                            <li>
+                                <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=category&action=show&id=<?= $categoria['id'] ?>">
+                                    <?= htmlspecialchars($categoria['nombre']) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php else: ?>
+                <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=category&action=index">Categorías</a>
+            <?php endif; ?>
+
+            <?php if(!empty($marcas)): ?>
+                <div class="dropdown">
+                    <button class="dropdown-toggle nav-link" type="button" aria-expanded="false" aria-haspopup="true">
+                        Marcas
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <?php foreach($marcas as $marca): ?>
+                            <li>
+                                <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=brand&action=show&id=<?= $marca['id'] ?>">
+                                    <?= htmlspecialchars($marca['nombre']) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php else: ?>
+                <a class="nav-link" href="<?= BASE_URL ?>index.php?controller=brand&action=index">Marcas</a>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</nav>
+
+<script src="<?= BASE_URL ?>js/dropdown_menu.js"></script>

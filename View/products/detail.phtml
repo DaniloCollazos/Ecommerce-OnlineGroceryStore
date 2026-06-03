@@ -1,0 +1,114 @@
+<?php
+/**
+ * Vista Detalle de Producto — AnimaMarket
+ */
+?>
+
+<div class="page-enter product-detail-page">
+    
+    <!-- BOTÓN VOLVER -->
+    <div class="mb-4">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon"> Volver
+        </button>
+    </div>
+
+    <div class="product-detail">
+
+        <!-- IMAGEN PRINCIPAL -->
+        <section class="product-gallery">
+            <div class="product-image-wrapper">
+                <?php if(!empty($product['fotos']) && isset($product['fotos'][0])): ?>
+                    <img src="<?= BASE_URL . htmlspecialchars($product['fotos'][0]) ?>"
+                        class="product-main-img"
+                        alt="<?= htmlspecialchars($product['nombre']) ?>">
+                <?php else: ?>
+                    <img src="<?= BASE_URL ?>img/default.jpg"
+                        class="product-main-img"
+                        alt="Sin imagen">
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <!-- DETALLE DEL PRODUCTO -->
+        <section class="product-info">
+            <div class="product-meta">
+                <?php if(!empty($product['categoria'])): ?>
+                    <span class="badge bg-secondary me-1">
+                        <?= htmlspecialchars($product['categoria']) ?>
+                    </span>
+                <?php endif; ?>
+
+                <?php if(!empty($product['marca'])): ?>
+                    <span class="badge bg-outline-secondary">
+                        <?= htmlspecialchars($product['marca']) ?>
+                    </span>
+                <?php endif; ?>
+            </div>
+
+            <h1 class="product-title"><?= htmlspecialchars($product['nombre']) ?></h1>
+            <p class="product-description"><?= htmlspecialchars($product['descripcion'] ?? '') ?></p>
+            <p class="product-price">$<?= number_format($product['precio'], 0, ',', '.') ?></p>
+
+            <?php if(isset($product['stock'])): ?>
+                <p class="product-stock small">
+                    Stock:
+                    <strong class="<?= $product['stock'] <= 5 ? 'text-danger' : 'text-success' ?>">
+                        <?= $product['stock'] ?> unidades
+                    </strong>
+                </p>
+            <?php endif; ?>
+        </section>
+
+        <!-- ANIMACIÓN + CANTIDAD -->
+        <aside class="product-tools">
+            <div class="grain-animation-wrapper">
+                <div class="grain-ui">
+                    <div id="fallZone" class="fall-zone"></div>
+                    <div id="grainPile" class="grain-pile"></div>
+
+                    <div class="bag-wrapper">
+                        <div id="bagFill" class="bag-fill"></div>
+                        <div class="bag-outline"></div>
+                    </div>
+
+                    <div class="scale-wrapper">
+                        <div class="scale-beam" id="scaleBeam"></div>
+                        <div class="scale-weight">
+                            <span id="weightText">1</span> lb
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quantity-control">
+                    <label class="form-label fw-bold" for="lbsInput">Cantidad (libras)</label>
+                    <div class="quantity-control-row">
+                        <button class="btn btn-outline-secondary qty-btn" id="btnMinus" type="button">−</button>
+
+                        <input type="number"
+                            id="lbsInput"
+                            class="form-control qty-input"
+                            value="1"
+                            min="1"
+                            max="<?= $product['stock'] ?? 100 ?>">
+
+                        <button class="btn btn-outline-secondary qty-btn" id="btnPlus" type="button">+</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- AGREGAR AL CARRITO -->
+    <div class="product-actions product-actions--full">
+        <form method="POST" action="<?= BASE_URL ?>index.php?controller=cart&action=add">
+            <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+            <input type="hidden" name="cantidad" id="hiddenCantidad" value="1">
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+                🛒 Agregar al carrito
+            </button>
+        </form>
+    </div>
+</div>

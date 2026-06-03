@@ -1,0 +1,82 @@
+<!-- PRODUCTOS -->
+
+<section>
+
+    <div class="container-cards">
+
+        <div class="products-grid">
+
+            <?php foreach($productos as $p): ?>
+
+                <?php
+                    $imgUrl = $p['imagenes'][0]['url'] ?? null;
+                    $img = (!empty($imgUrl))
+                        ? BASE_URL . $imgUrl
+                        : BASE_URL . 'img/products/default.jpg';
+                ?>
+
+                <article class="card card-product">
+
+                    <!-- Imagen -->
+                    <div class="card-img-wrapper">
+                        <img 
+                            src="<?= $img ?>" 
+                            class="card-img" 
+                            alt="<?= htmlspecialchars($p['nombre']) ?>">
+                    </div>
+
+                    <!-- Contenido -->
+                    <div class="card-body">
+
+                        <h3 class="card-title">
+                            <?= htmlspecialchars($p['nombre']) ?>
+                        </h3>
+
+                        <p class="card-text">
+                            <?= htmlspecialchars($p['descripcion']) ?>
+                        </p>
+
+                        <p class="card-price">
+                            $ <?= htmlspecialchars($p['precio']) ?>
+                        </p>
+
+                        <p class="card-stock">
+                            Stock: <?= htmlspecialchars($p['stock']) ?>
+                        </p>
+
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="card-actions">
+
+                        <a 
+                            href="index.php?controller=product&action=show&id=<?= $p['id'] ?>" 
+                            class="btn-anima-outline">
+                            Ver Detalles
+                        </a>
+
+                        <form 
+                            action="index.php?controller=cart&action=add" 
+                            method="POST">
+                            
+                            <input 
+                                type="hidden" 
+                                name="product_id" 
+                                value="<?= $p['id'] ?>">
+
+                            <button type="submit" class="btn-anima">
+                                🛒 Agregar
+                            </button>
+                        </form>
+
+                    </div>
+
+                </article>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    </div>
+
+</section>

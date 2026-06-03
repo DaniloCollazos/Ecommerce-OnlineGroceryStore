@@ -1,0 +1,34 @@
+<?php
+/**
+ * Header Global — AnimaMarket
+ * Renderiza el header principal compartido por cliente y admin.
+ */
+
+$esAdmin = isAdmin();
+$usuario = currentUser();
+$nombre  = $usuario['nombre'] ?? null;
+?>
+<!-- HEADER -->
+<header class="header <?= $esAdmin ? 'header--admin' : 'header--client' ?>">
+    <div class="content-wrapper">
+        <div class="header-top">
+            <a class="header-brand" href="<?= BASE_URL ?>index.php?controller=home&action=index">
+                <span class="header-brand-mark">🛒</span>
+                <span class="header-brand-text"><?= APP_NAME ?></span>
+            </a>
+
+            <div class="header-search-wrap">
+                <?php require_once __DIR__ . '/options_nav/search.phtml'; ?>
+            </div>
+
+            <div class="header-tools">
+                <?php require_once __DIR__ . '/options_nav/auth.phtml'; ?>
+                <?php require_once __DIR__ . '/options_nav/cart.phtml'; ?>
+            </div>
+        </div>
+
+        <div class="header-bottom">
+            <?php require_once __DIR__ . '/options_nav/navbar.phtml'; ?>
+        </div>
+    </div>
+</header>

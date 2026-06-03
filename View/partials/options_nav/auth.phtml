@@ -1,0 +1,8 @@
+<?php if($nombre): ?>
+    <a href="<?= BASE_URL ?>index.php?controller=user&action=profile" class="header-action-link">Mi cuenta</a>
+    <a href="<?= BASE_URL ?>index.php?controller=Auth&action=logout" class="btn-anima">Salir</a>
+<?php else: ?>
+    <?php if(!$esAdmin): ?>
+        <a href="<?= BASE_URL ?>index.php?controller=Auth&action=login" class="header-login-link">Inicia sesión</a>
+    <?php endif; ?>
+<?php endif; ?>

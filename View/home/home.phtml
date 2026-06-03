@@ -1,0 +1,87 @@
+<?php
+/**
+ * Vista Home — AnimaMarket
+ * Ruta: View/home/home.phtml
+ * Página principal con hero, productos destacados y categorías.
+ */
+?>
+
+<section class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">Bienvenido a <?= APP_NAME ?></span>
+            <h1>Tu mercado online de abarrotes y productos frescos</h1>
+            <p>
+                Compra rápido, recibe en casa y aprovecha descuentos exclusivos en cada pedido.
+            </p>
+            <div class="hero-actions">
+                <a href="<?= BASE_URL ?>index.php?controller=product&action=index" class="btn-anima btn-lg">
+                    Ver productos
+                </a>
+                <a href="<?= BASE_URL ?>index.php?controller=category&action=index" class="btn-anima-outline btn-lg">
+                    Ver categorías
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-home">
+        <div class="container">
+            <div class="section-header">
+                <h2>Productos destacados</h2>
+                <p class="text-muted">Los favoritos de la tienda para tu compra diaria.</p>
+            </div>
+
+            <?php if(!empty($productos)): ?>
+                <div class="products-home">
+                    <?php foreach(array_slice($productos, 0, 4) as $p): ?>
+                        <?php
+                            $imgUrl = $p['imagenes'][0]['url'] ?? null;
+                            $img = !empty($imgUrl)
+                                ? BASE_URL . $imgUrl
+                                : BASE_URL . 'img/products/default.jpg';
+                        ?>
+
+                        <article class="category-card">
+                            <img src="<?= $img ?>" alt="<?= htmlspecialchars($p['nombre']) ?>" class="card-img">
+                            <h4><?= htmlspecialchars($p['nombre']) ?></h4>
+                            <p class="text-muted">
+                                $<?= htmlspecialchars($p['precio']) ?>
+                            </p>
+                            <a href="<?= BASE_URL ?>index.php?controller=product&action=show&id=<?= $p['id'] ?>" class="btn-anima btn-sm">
+                                Ver detalles
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="promo-banner">
+                    <h2>Descubre nuestros productos</h2>
+                    <p>Encuentra abarrotes, bebidas, snacks y mucho más para tu despensa.</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+
+    <section class="section-home alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Categorías populares</h2>
+                <p class="text-muted">Encuentra lo que buscas según tu tipo de compra.</p>
+            </div>
+
+            <div class="categories-grid">
+                <a href="<?= BASE_URL ?>index.php?controller=category&action=show&id=1" class="category-card">
+                    <h4>Abarrotes</h4>
+                </a>
+                <a href="<?= BASE_URL ?>index.php?controller=category&action=show&id=2" class="category-card">
+                    <h4>Bebidas</h4>
+                </a>
+                <a href="<?= BASE_URL ?>index.php?controller=category&action=show&id=3" class="category-card">
+                    <h4>Lácteos</h4>
+                </a>
+                <a href="<?= BASE_URL ?>index.php?controller=category&action=show&id=4" class="category-card">
+                    <h4>Snacks</h4>
+                </a>
+            </div>
+        </div>
+    </section>

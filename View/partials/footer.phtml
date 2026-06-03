@@ -1,0 +1,99 @@
+<?php
+/**
+ * Footer — AnimaMarket
+ * Pie de página reutilizable
+ */
+?>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- TIENDA -->
+        <div class="footer-col">
+            <h3><?= APP_NAME ?? 'Tienda' ?></h3>
+            <p>
+                La mejor tienda online con productos de calidad y envíos rápidos.
+            </p>
+        </div>
+
+        <!-- ENLACES -->
+        <div class="footer-col">
+            <h4>Enlaces</h4>
+
+            <a href="<?= BASE_URL ?>index.php?controller=category&action=index">
+                Categorías
+            </a>
+
+            <a href="<?= BASE_URL ?>index.php?controller=promotion&action=index">
+                Ofertas
+            </a>
+
+            <a href="<?= BASE_URL ?>index.php?controller=product&action=top_selling">
+                Más vendidos
+            </a>
+
+            <a href="<?= BASE_URL ?>index.php?controller=contact&action=index">
+                Contacto
+            </a>
+        </div>
+
+        <!-- AYUDA -->
+        <div class="footer-col">
+            <h4>Ayuda</h4>
+
+            <a href="<?= BASE_URL ?>index.php?controller=help&action=how_to_buy">
+                Cómo comprar
+            </a>
+
+            <a href="<?= BASE_URL ?>index.php?controller=help&action=shipping">
+                Envíos
+            </a>
+
+            <a href="<?= BASE_URL ?>index.php?controller=help&action=returns">
+                Devoluciones
+            </a>
+
+            <a href="<?= BASE_URL ?>index.php?controller=help&action=support">
+                Soporte
+            </a>
+        </div>
+
+        <!-- REDES SOCIALES -->
+        <div class="footer-col">
+            <h4>Redes</h4>
+
+            <div class="socials">
+                <a href="https://facebook.com" target="_blank" rel="noopener">
+                    Facebook
+                </a>
+
+                <a href="https://instagram.com" target="_blank" rel="noopener">
+                    Instagram
+                </a>
+
+                <a href="https://wa.me/123456789" target="_blank" rel="noopener">
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+        © <?= date('Y') ?> <?= APP_NAME ?? 'Tienda' ?> - Todos los derechos reservados
+    </div>
+
+    <!-- DESARROLLADORES -->
+    <div class="footer-col">
+        <ul class="dev-list">
+            <li><a href="https://github.com/AdrianGalindez" target="_blank" rel="noopener">Adrian Galindez</a></li>
+            <li><a href="https://github.com/VeroPajoyUni" target="_blank" rel="noopener">Verónica Pajoy</a></li>
+            <li><a href="https://github.com/danilocollazos" target="_blank" rel="noopener">Danilo Collazos</a></li>
+            <li><a href="https://github.com/MairaGarcia" target="_blank" rel="noopener">Maira Garcia</a></li>
+        </ul>
+
+    </div>
+</footer>

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Vista Catálogo — AnimaMarket
+ * Ruta: View/products/index.phtml
+ * Catálogo principal con grid de productos.
+ */
+require_once __DIR__ . '/../partials/carousel.phtml';
+?>
+
+<section class="page-enter">
+
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <button class="btn-back" onclick="history.back()" title="Volver">
+            <img src="<?= BASE_URL ?>icons/volver.png" alt="Volver" class="btn-back-icon">
+        </button>
+        <div class="d-flex justify-content-between align-items-center flex-grow-1">
+            <h2 class="section-title mb-0">Nuestros Productos</h2>
+            <span class="text-muted small">
+                <?= count($productos) ?> productos disponibles
+            </span>
+        </div>
+    </div>
+
+    <?php if(empty($productos)): ?>
+        <div class="text-center py-5">
+            <i class="bi bi-inbox fs-1 text-muted"></i>
+            <p class="text-muted mt-2">No hay productos disponibles aún.</p>
+        </div>
+    <?php else: ?>
+        <?php include __DIR__ . '/../partials/product-card.phtml'; ?>
+    <?php endif; ?>
+
+</section>

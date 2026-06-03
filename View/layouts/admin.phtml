@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $pageTitle ?? 'Admin - AnimaMarket' ?></title>
+    
+    <!-- CSS BASE -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
+    
+</head>
+<body class="admin-body">
+    <?php require_once __DIR__ . '/../partials/header.phtml'; ?>
+
+    <div class="admin-container">
+        
+        <main class="admin-main">
+            <?= $content ?>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <?php require_once __DIR__ . '/../partials/footer.phtml'; ?>
+
+    <!-- JS PRINCIPAL -->
+    <script src="<?= BASE_URL ?>js/main.js"></script>
+</body>
+</html>
