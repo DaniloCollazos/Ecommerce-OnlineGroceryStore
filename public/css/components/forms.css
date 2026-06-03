@@ -1,0 +1,24 @@
+/* FORMULARIOS */
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-sm);
+}
+
+.input {
+    width: 100%;
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-fast);
+}
+
+.input:focus {
+    border-color: var(--color-accent);
+    box-shadow: var(--focus-ring);
+}

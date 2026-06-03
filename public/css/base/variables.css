@@ -1,0 +1,174 @@
+   /**
+   * Variables globales — AnimaMarket
+   * Paleta: ivory, champagne, rose-gold, taupe, mauve, leather
+   */
+
+   :root {
+      /* =========================================================
+         COLORES PRINCIPALES
+         ========================================================= */
+      --color-primary:        #5f4b4d;  /* Leather */
+      --color-primary-soft:   #7b6763;  /* Leather suave */
+
+      --color-accent:         #a86e75;  /* Mauve */
+      --color-accent-soft:    #bb848a;  /* Mauve suave */
+
+      --color-secondary:      #c8a0a3;  /* Rose-gold */
+      --color-secondary-soft: #e3d2c1;  /* Champagne */
+
+      --color-highlight:      #9d8681;  /* Taupe */
+
+      /* =========================================================
+         FONDOS (LAYOUT)
+         ========================================================= */
+      --bg-body:        #f3efeb;  /* Ivory */
+      --bg-card:        #fcfaf8;  /* Superficie clara */
+      --bg-soft:        #efe4da;  /* Champagne claro */
+      --bg-hover:       #e6d7cc;  /* Hover suave */
+
+      --bg-dark:        #3e3133;  /* Leather oscuro */
+      --bg-overlay:     rgba(0,0,0,0.5);
+
+      /* =========================================================
+         TEXTO
+         ========================================================= */
+      --text-primary:   #342b2c;  /* Texto principal */
+      --text-secondary: #6d5d5f;  /* Texto secundario */
+      --text-muted:     #96858a;  /* Placeholder */
+      --text-light:     #ffffff;  /* Texto sobre fondos oscuros */
+
+      --text-link:      var(--color-accent);
+      --text-link-hover:#8f5860;
+
+      /* =========================================================
+         BOTONES
+         ========================================================= */
+      --btn-primary-bg:       var(--color-accent);
+      --btn-primary-hover:    var(--color-accent-soft);
+      --btn-primary-text:     #ffffff;
+
+      --btn-secondary-bg:     var(--color-secondary);
+      --btn-secondary-hover:  var(--color-secondary-soft);
+      --btn-secondary-text:   #ffffff;
+
+      --btn-outline-border:   var(--color-accent);
+      --btn-outline-hover:    var(--color-accent);
+      --btn-outline-text:     var(--color-accent);
+
+      /* =========================================================
+         NAVEGACIÓN (NAVBAR / MENÚ)
+         ========================================================= */
+      --nav-bg:         #f6efe8;
+      --nav-text:       #4f3f42;
+      --nav-hover:      var(--color-secondary-soft);
+      --nav-active:     var(--color-secondary);
+
+      /* =========================================================
+         ELEMENTOS DE TIENDA
+         ========================================================= */
+      --price-color:    #5c7f63;  /* Precios */
+      --discount-color: #9c5a61;  /* Descuentos */
+      --stock-ok:       #5a7a60;
+      --stock-low:      #b58a58;
+      --stock-out:      #9b4a4f;
+
+      --badge-new:      #7a9b80;
+      --badge-sale:     var(--color-accent);
+
+      /* =========================================================
+         ESTADOS DEL SISTEMA
+         ========================================================= */
+      --success:        #5a7a60;
+      --success-light:  #edf4ee;
+
+      --danger:         #9b4a4f;
+      --danger-light:   #f8ecee;
+
+      --warning:        #b58a58;
+      --warning-light:  #fbf4ea;
+
+      --info:           #6f8ea3;
+      --info-light:     #edf3f7;
+
+      /* =========================================================
+         BORDES Y DIVISORES
+         ========================================================= */
+      --border-color:   #dccdc3;
+      --border-soft:    #eadfd7;
+
+      /* =========================================================
+         SOMBRAS (PROFUNDIDAD)
+         ========================================================= */
+      --shadow-sm:   0 2px 6px rgba(0,0,0,0.08);
+      --shadow-md:   0 4px 14px rgba(0,0,0,0.12);
+      --shadow-lg:   0 10px 30px rgba(0,0,0,0.18);
+
+      --shadow-warm: 0 6px 20px rgba(168, 110, 117, 0.24);
+
+      /* =========================================================
+         EFECTOS / INTERACCIONES
+         ========================================================= */
+      --hover-scale:        scale(1.03);
+      --active-scale:       scale(0.97);
+
+      --focus-ring:         0 0 0 3px rgba(168, 110, 117, 0.32);
+
+      /* =========================================================
+         TIPOGRAFÍA
+         ========================================================= */
+      --font-base:      'Segoe UI', system-ui, sans-serif;
+      --font-title:     'Poppins', sans-serif;
+      --font-mono:      'Courier New', monospace;
+
+      --text-xs:        0.75rem;
+      --text-sm:        0.875rem;
+      --text-base:      1rem;
+      --text-lg:        1.125rem;
+      --text-xl:        1.25rem;
+      --text-2xl:       1.5rem;
+      --text-3xl:       1.875rem;
+
+      /* =========================================================
+         ESPACIADO
+         ========================================================= */
+      --space-xs:   0.25rem;
+      --space-sm:   0.5rem;
+      --space-md:   1rem;
+      --space-lg:   1.5rem;
+      --space-xl:   2rem;
+      --space-2xl:  3rem;
+
+      /* =========================================================
+         BORDES Y RADIOS
+         ========================================================= */
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --radius-xl:   28px;
+      --radius-full: 9999px;
+
+      /* =========================================================
+         TRANSICIONES
+         ========================================================= */
+      --transition-fast:   150ms ease;
+      --transition-base:   300ms ease;
+      --transition-slow:   500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      /* =========================================================
+         LAYOUT (HEADER, FOOTER, MAIN)
+         ========================================================= */
+      --header-height:     80px;
+      --footer-height:     auto;
+      --content-max-width: 1200px;
+      --content-padding:   var(--space-md);
+
+      /* =========================================================
+         PANEL ADMIN
+         ========================================================= */
+      --admin-sidebar-w:   240px;
+      --admin-navbar-h:    56px;
+
+      --admin-bg:          #f3efeb;
+      --admin-sidebar-bg:  #5f4b4d;
+      --admin-sidebar-txt: #ffffff;
+   }

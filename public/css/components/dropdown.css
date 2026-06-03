@@ -1,0 +1,74 @@
+/* =========================================================
+DROPDOWN — NAVBAR (ALINEADO CON VARIABLES PRO)
+========================================================= */
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* MENÚ */
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+
+    min-width: 200px;
+    padding: var(--space-sm) 0;
+
+    background-color: var(--bg-card); /* ✔ correcto */
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-soft);
+
+    display: none;
+    z-index: 1000;
+}
+
+/* MOSTRAR */
+.dropdown.open .dropdown-menu {
+    display: block;
+    animation: dropdownFade 0.2s ease;
+}
+
+/* ITEMS */
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+
+    color: var(--text-primary); /* ✔ legible */
+    font-size: var(--text-sm);
+
+    transition:
+        background var(--transition-fast),
+        padding var(--transition-fast),
+        color var(--transition-fast);
+}
+
+/* HOVER */
+.dropdown-menu a:hover {
+    background: var(--bg-hover);
+    padding-left: calc(var(--space-md) + 4px);
+    color: var(--color-primary);
+}
+
+/* ANIMACIÓN */
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

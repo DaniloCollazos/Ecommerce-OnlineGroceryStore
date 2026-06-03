@@ -1,0 +1,30 @@
+/* TIPOGRAFÍA */
+
+body {
+    font-family: var(--font-base);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    background: var(--bg-body);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    color: var(--color-primary);
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+
+p {
+    color: var(--text-secondary);
+}
+
+.text-center { text-align: center; }
+
+/* TEXT SIZES */
+small,
+.small {
+    font-size: 0.875rem;
+}

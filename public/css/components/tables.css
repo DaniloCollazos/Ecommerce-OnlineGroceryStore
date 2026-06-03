@@ -1,0 +1,130 @@
+/* TABLAS */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.table th {
+    text-align: left;
+    padding: var(--space-md);
+    border-bottom: 2px solid var(--border-color);
+    font-weight: 700;
+    background: var(--bg-soft);
+    color: var(--text-primary);
+}
+
+.table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: middle;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* TABLE VARIANTS */
+.table-hover tbody tr:hover {
+    background-color: var(--bg-hover);
+}
+
+.table-dark thead {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.table-dark thead th {
+    background-color: var(--bg-dark);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+}
+
+/* TABLE UTILITIES */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+/* BADGES */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.bg-success {
+    background-color: var(--success);
+    color: #ffffff;
+}
+
+.bg-danger {
+    background-color: var(--danger);
+    color: #ffffff;
+}
+
+.bg-warning {
+    background-color: var(--warning);
+    color: #000;
+}
+
+.bg-info {
+    background-color: var(--info);
+    color: #ffffff;
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+/* ALERTS */
+.alert {
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.alert-success {
+    background-color: var(--success-light);
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.alert-danger {
+    background-color: var(--danger-light);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.alert-warning {
+    background-color: var(--warning-light);
+    color: var(--text-primary);
+    border-color: var(--warning);
+}
+
+.alert-info {
+    background-color: var(--info-light);
+    color: var(--info);
+    border-color: var(--info);
+}

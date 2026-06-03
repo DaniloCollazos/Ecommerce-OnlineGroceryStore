@@ -1,0 +1,45 @@
+<?php
+/**
+ * Vista Admin — Listado Marcas
+ * Ruta: View/admin/brand/BrandIndexView.phtml
+ */
+
+?>
+
+<div class="page-enter">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-bookmark-star"></i> Marcas</h2>
+        <a href="<?= BASE_URL ?>index.php?controller=brand&action=create"
+           class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nueva Marca
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover admin-table">
+            <thead class="table-dark">
+                <tr><th>#</th><th>Nombre</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                <?php foreach($brands as $brand): ?>
+                <tr>
+                    <td><?= $brand['id'] ?></td>
+                    <td><?= htmlspecialchars($brand['nombre']) ?></td>
+                    <td>
+                        <a href="<?= BASE_URL ?>index.php?controller=brand&action=edit&id=<?= $brand['id'] ?>"
+                           class="btn btn-sm btn-outline-warning me-1">
+                            <i class="bi bi-pencil">Editar</i>
+                        </a>
+                        <a href="<?= BASE_URL ?>index.php?controller=brand&action=delete&id=<?= $brand['id'] ?>"
+                           class="btn btn-sm btn-outline-danger"
+                           onclick="return confirm('¿Eliminar esta marca?')">
+                            <i class="bi bi-trash">Eliminar</i>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

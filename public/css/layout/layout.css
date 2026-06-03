@@ -1,0 +1,233 @@
+/* ========================================================
+   LAYOUT GENERAL — AnimaMarket
+   Estructura responsive del sitio (header, main, footer)
+   ======================================================== */
+
+/* ========================================================
+   CONTENEDOR REUTILIZABLE
+   ======================================================== */
+
+.container,
+.content-wrapper {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+    width: 100%;
+}
+
+/* ========================================================
+   BODY Y ESTRUCTURA GENERAL
+   ======================================================== */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ========================================================
+   HEADER
+   ======================================================== */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+/* ========================================================
+   CONTENIDO PRINCIPAL
+   ======================================================== */
+
+.site-main {
+    flex: 1;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--content-padding);
+    width: 100%;
+    max-width: var(--content-max-width);
+}
+
+@media (max-width: 1024px) {
+    .site-main {
+        padding: var(--space-xl) var(--content-padding);
+    }
+}
+
+@media (max-width: 768px) {
+    .site-main {
+        padding: var(--space-lg) var(--content-padding);
+    }
+}
+
+@media (max-width: 480px) {
+    .site-main {
+        padding: var(--space-md) var(--content-padding);
+    }
+}
+
+/* ========================================================
+   FOOTER
+   ======================================================== */
+
+.footer {
+    background: var(--color-primary);
+    color: var(--text-light);
+    padding: var(--space-2xl) var(--content-padding);
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* Contenedor interno del footer con máximo ancho */
+.footer-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-2xl);
+    padding: 0 var(--content-padding);
+    margin-bottom: var(--space-2xl);
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.footer-col h3,
+.footer-col h4 {
+    color: var(--text-light);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.footer-col p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--text-sm);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.footer-col a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--transition-fast);
+    display: inline-block;
+}
+
+.footer-col a:hover {
+    color: var(--text-light);
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Lista de desarrolladores en footer: en línea y centrada */
+.dev-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    align-items: center;
+}
+
+.dev-list li {
+    color: rgba(255,255,255,0.85);
+    font-size: var(--text-sm);
+    margin: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--content-padding);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================================
+   RESPONSIVE - TABLET
+   ======================================================== */
+
+@media (max-width: 1024px) {
+    .footer {
+        padding: var(--space-xl) var(--content-padding);
+    }
+
+    .footer-container {
+        gap: var(--space-xl);
+        margin-bottom: var(--space-xl);
+    }
+
+    .footer-bottom {
+        padding: var(--space-md) var(--content-padding);
+    }
+}
+
+/* ========================================================
+   RESPONSIVE - MOBILE
+   ======================================================== */
+
+@media (max-width: 768px) {
+    .footer {
+        padding: var(--space-lg) var(--content-padding);
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-lg);
+    }
+
+    .footer-col h3,
+    .footer-col h4 {
+        font-size: var(--text-base);
+    }
+
+    .footer-col p,
+    .footer-col a {
+        font-size: var(--text-xs);
+    }
+
+    .footer-bottom {
+        padding: var(--space-sm) var(--content-padding);
+        font-size: var(--text-xs);
+    }
+}
+
+/* ========================================================
+   RESPONSIVE - MOBILE PEQUEÑO
+   ======================================================== */
+
+@media (max-width: 480px) {
+    .footer {
+        padding: var(--space-md) var(--content-padding);
+    }
+
+    .footer-container {
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+    }
+
+    .footer-col h3,
+    .footer-col h4 {
+        font-size: var(--text-base);
+    }
+
+    .footer-bottom {
+        padding: var(--space-sm) var(--content-padding);
+    }
+}

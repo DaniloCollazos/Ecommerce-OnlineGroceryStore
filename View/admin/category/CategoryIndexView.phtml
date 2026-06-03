@@ -1,0 +1,56 @@
+<?php
+/**
+ * Vista Admin — Listado Categorías
+ * Ruta: View/admin/category/CategoryIndexView.phtml
+ */
+
+?>
+
+<div class="page-enter">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-tags"></i> Categorías</h2>
+        <a href="<?= BASE_URL ?>index.php?controller=category&action=create"
+           class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nueva Categoría
+        </a>
+    </div>
+
+    <?php if(isset($_GET['error']) && $_GET['error'] === 'tiene_productos'): ?>
+        <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i>
+            No puedes eliminar una categoría con productos asociados.
+        </div>
+    <?php endif; ?>
+
+    <div class="table-responsive">
+        <table class="table table-hover admin-table">
+            <thead class="table-dark">
+                <tr><th>#</th><th>Nombre</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                <?php foreach($categories as $cat): ?>
+                <tr>
+                    <td><?= $cat['id'] ?></td>
+                    <td><?= htmlspecialchars($cat['nombre']) ?></td>
+                    <td>
+                        <a href="<?= BASE_URL ?>index.php?controller=category&action=edit&id=<?= $cat['id'] ?>"
+                           class="btn btn-sm btn-outline-warning me-1">
+                            <i class="bi bi-pencil">Editar</i>
+                        </a>
+                        <form method="POST"
+                              action="<?= BASE_URL ?>index.php?controller=category&action=delete"
+                              class="d-inline"
+                              onsubmit="return confirm('¿Eliminar?')">
+                            <input type="hidden" name="id" value="<?= $cat['id'] ?>">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash">Borrar</i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

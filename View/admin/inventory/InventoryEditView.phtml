@@ -1,0 +1,60 @@
+<?php
+/**
+ * Vista Admin — Editar Inventario
+ * Ruta: View/admin/inventory/InventoryEditView.phtml
+ */
+?>
+
+<div class="page-enter">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-pencil"></i> Editar Inventario</h2>
+        <a href="<?= BASE_URL ?>index.php?controller=inventory&action=index"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    <div class="card admin-form-card">
+    <div class="card-body">
+        <form method="POST"
+              action="<?= BASE_URL ?>index.php?controller=inventory&action=update">
+
+            <input type="hidden" name="id" value="<?= $inventory['id'] ?>">
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Producto</label>
+                <input type="text" class="form-control"
+                       value="<?= htmlspecialchars($inventory['producto'] ?? '') ?>"
+                       readonly disabled>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Stock Actual *</label>
+                    <input type="number" name="stock_actual"
+                           class="form-control" required min="0"
+                           value="<?= $inventory['stock_actual'] ?>">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Stock Mínimo *</label>
+                    <input type="number" name="stock_minimo"
+                           class="form-control" required min="0"
+                           value="<?= $inventory['stock_minimo'] ?>">
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="<?= BASE_URL ?>index.php?controller=inventory&action=index"
+                   class="btn btn-outline-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-warning">
+                    <i class="bi bi-save"></i> Guardar cambios
+                </button>
+            </div>
+
+        </form>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+/* ======================================================
+   MAIN CSS — AnimaMarket
+   Importa todos los estilos CSS del proyecto
+   ====================================================== */
+
+/* BASE */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+
+/* LAYOUT */
+@import url('./layout/layout.css');
+@import url('./layout/grid.css');
+
+/* COMPONENTES */
+@import url('./components/navbar.css');
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/forms.css');
+@import url('./components/alerts.css');
+@import url('./components/tables.css');
+@import url('./components/dropdown.css');
+@import url('./components/carousel.css');
+
+/* PÁGINAS */
+@import url('./pages/categories.css');
+@import url('./pages/home.css');
+@import url('./pages/product-detail.css');
+@import url('./pages/login.css');
+
+/* ADMIN */
+@import url('./admin/admin.css');
+
+/* ANIMACIONES */
+@import url('./animations/animations.css');
+
+
+body.login-body {
+    background:
+        linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+        url('../img/fondo_tienda.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+}
