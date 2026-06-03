@@ -1,29 +1,25 @@
 FROM php:8.2-apache
 
-# Instalar dependencias del sistema + extensiones PHP para PostgreSQL
-RUN apt-get update && apt-get install -y \
-        libpq-dev \
-        && docker-php-ext-install pdo pdo_pgsql pgsql \
-        && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Extensiones PostgreSQL
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql pgsql \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Habilitar mod_rewrite (necesario para URLs limpias y SEO)
+# Habilitar mod_rewrite
 RUN a2enmod rewrite
 
-# ✅ CRÍTICO para Render: configurar DocumentRoot al directorio /public
-# Evita exponer Config/, Models/, etc. al navegador
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
-    && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/apache2.conf
+# ✅ Copiar archivos ANTES de configurar Apache
+COPY . /var/www/html/
 
-# Permitir que .htaccess funcione dentro de /public
+# ✅ Apuntar DocumentRoot a /public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
+        /etc/apache2/sites-available/000-default.conf
+
+# ✅ Permitir .htaccess en /public
 RUN echo '<Directory /var/www/html/public>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
-</Directory>' >> /etc/apache2/apache2.conf
-
-COPY . /var/www/html/
-
-# ✅ Nunca exponer el .env al navegador — moverlo fuera del public
-# (tu estructura ya lo tiene en la raíz, bien)
+</Directory>' >> /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
