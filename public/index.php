@@ -6,7 +6,7 @@ echo 'Contenido de /var/www/html/: ';
 print_r(scandir('/var/www/html/'));
 echo 'Contenido de /var/www/html/public/: ';
 print_r(scandir('/var/www/html/public/'));
-echo '¿Existe Config/?: ' . (file_exists('/var/www/html/Config/Database.php') ? 'SÍ ✅' : 'NO ❌');
+echo '¿Existe Config/?: ' . (file_exists('/var/www/html/Config/database.php') ? 'SÍ ✅' : 'NO ❌');
 die();
 
 /**
@@ -21,9 +21,9 @@ require_once __DIR__ . '/../Config/env.php';
 loadEnv(__DIR__ . '/../.env');
 
 // 2. CONFIGURACIONES BASE
-require_once __DIR__ . '/../Config/Database.php';
-require_once __DIR__ . '/../Config/App.php';
-require_once __DIR__ . '/../Config/Session.php';
+require_once __DIR__ . '/../Config/database.php';
+require_once __DIR__ . '/../Config/app.php';
+require_once __DIR__ . '/../Config/session.php';
 
 // 3. INICIAR SESIÓN
 session_start();
