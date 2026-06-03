@@ -1,4 +1,13 @@
+
+
 <?php
+echo '<pre>';
+echo 'Contenido de /var/www/html/: ';
+print_r(scandir('/var/www/html/'));
+echo 'Contenido de /var/www/html/public/: ';
+print_r(scandir('/var/www/html/public/'));
+echo '¿Existe Config/?: ' . (file_exists('/var/www/html/Config/Database.php') ? 'SÍ ✅' : 'NO ❌');
+die();
 
 /**
  * Front Controller — AnimaMarket
