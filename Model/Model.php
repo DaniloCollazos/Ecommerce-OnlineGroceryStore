@@ -6,7 +6,7 @@
  * Provee la conexión PDO y métodos genéricos de consulta que todos los modelos heredan.
  */
 
-require_once __DIR__ . '/../Config/Database.php';
+require_once __DIR__ . '/../Config/database.php';
 
 class Model {
 
