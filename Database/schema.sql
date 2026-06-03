@@ -1,225 +1,179 @@
-CREATE DATABASE ecommerce_online_grocery_store;
+-- ================== CREAR BASE DE DATOS ==================
+-- Esto lo hace Render automáticamente, no necesitas ejecutarlo
+-- CREATE DATABASE ecommerce_online_grocery_store;
 
-USE ecommerce_online_grocery_store;
 
-
--- //==================TABLA ROLES ================
-
-CREATE TABLE roles(
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre VARCHAR(50) NOT NULL
+-- ================== ROLES ==================
+CREATE TABLE roles (
+    id     SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
 );
 
 
--- //==================TABLA USUARIOS ================
-CREATE TABLE users(
+-- ================== USUARIOS ==================
+CREATE TABLE users (
+    id               SERIAL PRIMARY KEY,
+    nombre           VARCHAR(100),
+    email            VARCHAR(100) UNIQUE,
+    telefono         VARCHAR(20),
+    password         VARCHAR(255),
+    genero           VARCHAR(20),
+    direccion        VARCHAR(150),
+    barrio           VARCHAR(100),
+    ciudad           VARCHAR(100),
+    lat              DECIMAL(10,8),
+    lng              DECIMAL(11,8),
+    estado           VARCHAR(20)  DEFAULT 'Activo',
+    fecha_registro   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    rol_id           INT,
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre VARCHAR(100),
- email VARCHAR(100) UNIQUE,
- telefono VARCHAR(20),
- password VARCHAR(255),
-
- genero VARCHAR(20),
- direccion VARCHAR(150),
- barrio VARCHAR(100),
- ciudad VARCHAR(100),
-
- lat DECIMAL(10,8),
- lng DECIMAL(11,8),
-
- estado VARCHAR(20) DEFAULT 'Activo',
- fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
- rol_id INT,
-
- FOREIGN KEY (rol_id) REFERENCES roles(id)
-
+    FOREIGN KEY (rol_id) REFERENCES roles(id)
 );
 
 
+-- ================== DIRECCIONES ==================
+CREATE TABLE addresses (
+    id        SERIAL PRIMARY KEY,
+    user_id   INT,
+    direccion VARCHAR(200),
+    ciudad    VARCHAR(100),
+    barrio    VARCHAR(100),
+    referencia VARCHAR(150),
 
--- //==================TABLA DIRECCIONES ================
-CREATE TABLE addresses(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- user_id INT,
- direccion VARCHAR(200),
- ciudad VARCHAR(100),
- barrio VARCHAR(100),
- referencia VARCHAR(150),
-
- FOREIGN KEY (user_id) REFERENCES users(id)
-
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 
-
--- //==================TABLA CATEGORIAS ================
-CREATE TABLE categories(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre VARCHAR(100)
-
+-- ================== CATEGORIAS ==================
+CREATE TABLE categories (
+    id     SERIAL PRIMARY KEY,
+    nombre VARCHAR(100)
 );
 
 
-
--- //==================TABLA MARCAS ================
-CREATE TABLE brands(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre VARCHAR(100)
-
+-- ================== MARCAS ==================
+CREATE TABLE brands (
+    id     SERIAL PRIMARY KEY,
+    nombre VARCHAR(100)
 );
 
 
-
--- //====================TABLA PROVEEDORES============
-CREATE TABLE providers(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre VARCHAR(100),
- telefono VARCHAR(20),
- direccion VARCHAR(150)
-
+-- ================== PROVEEDORES ==================
+CREATE TABLE providers (
+    id        SERIAL PRIMARY KEY,
+    nombre    VARCHAR(100),
+    telefono  VARCHAR(20),
+    direccion VARCHAR(150)
 );
 
 
--- //====================TABLA PRODUCTOS============
-CREATE TABLE products(
+-- ================== PRODUCTOS ==================
+CREATE TABLE products (
+    id            SERIAL PRIMARY KEY,
+    nombre        VARCHAR(200),
+    descripcion   TEXT,
+    categoria_id  INT,
+    marca_id      INT,
+    proveedor_id  INT,
+    precio_costo  DECIMAL(10,2),
+    precio        DECIMAL(10,2),
+    stock         INT,
+    fecha_ingreso TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- nombre VARCHAR(200),
- descripcion TEXT,
-
- categoria_id INT,
- marca_id INT,
- proveedor_id INT,
-
- precio_costo DECIMAL(10,2),
- precio DECIMAL(10,2),
-
- stock INT,
-
- fecha_ingreso TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
- FOREIGN KEY (categoria_id) REFERENCES categories(id),
- FOREIGN KEY (marca_id) REFERENCES brands(id),
- FOREIGN KEY (proveedor_id) REFERENCES providers(id)
-
+    FOREIGN KEY (categoria_id) REFERENCES categories(id),
+    FOREIGN KEY (marca_id)     REFERENCES brands(id),
+    FOREIGN KEY (proveedor_id) REFERENCES providers(id)
 );
 
 
--- //===================TABLA IMAGENES DE PRODUCTOS ==========
-CREATE TABLE product_images(
+-- ================== IMAGENES DE PRODUCTOS ==================
+CREATE TABLE product_images (
+    id         SERIAL PRIMARY KEY,
+    product_id INT,
+    url        VARCHAR(255),
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- product_id INT,
- url VARCHAR(255),
-
- FOREIGN KEY (product_id) REFERENCES products(id)
-
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 
+-- ================== INVENTARIO ==================
+CREATE TABLE inventory (
+    id           SERIAL PRIMARY KEY,
+    product_id   INT,
+    stock_actual INT,
+    stock_minimo INT,
 
--- //====================TABLA INVENTARIO============
-CREATE TABLE inventory(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- product_id INT,
- stock_actual INT,
- stock_minimo INT,
-
- FOREIGN KEY (product_id) REFERENCES products(id)
-
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 
--- //====================TABLA CARRITO============
-CREATE TABLE carts(
+-- ================== CARRITO ==================
+CREATE TABLE carts (
+    id      SERIAL PRIMARY KEY,
+    user_id INT,
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- user_id INT,
-
- FOREIGN KEY (user_id) REFERENCES users(id)
-
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 
--- //=====================TABLA ITEMS DEL CARRITO ===========
-CREATE TABLE cart_items(
+-- ================== ITEMS DEL CARRITO ==================
+CREATE TABLE cart_items (
+    id         SERIAL PRIMARY KEY,
+    cart_id    INT,
+    product_id INT,
+    cantidad   INT,
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- cart_id INT,
- product_id INT,
- cantidad INT,
-
- FOREIGN KEY (cart_id) REFERENCES carts(id),
- FOREIGN KEY (product_id) REFERENCES products(id)
-
+    FOREIGN KEY (cart_id)    REFERENCES carts(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 
+-- ================== ORDENES ==================
+CREATE TABLE orders (
+    id      SERIAL PRIMARY KEY,
+    user_id INT,
+    total   DECIMAL(10,2),
+    estado  VARCHAR(50),
+    fecha   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-
-
--- //=======================TABLA ORDENES ================
-CREATE TABLE orders(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- user_id INT,
- total DECIMAL(10,2),
- estado VARCHAR(50),
- fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
- FOREIGN KEY (user_id) REFERENCES users(id)
-
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 
+-- ================== DETALLE DE ORDENES ==================
+CREATE TABLE order_items (
+    id         SERIAL PRIMARY KEY,
+    order_id   INT,
+    product_id INT,
+    cantidad   INT,
+    precio     DECIMAL(10,2),
 
--- //=========================TABLA DETALLE DE ORDENES ================
-CREATE TABLE order_items(
-
- id INT AUTO_INCREMENT PRIMARY KEY,
- order_id INT,
- product_id INT,
- cantidad INT,
- precio DECIMAL(10,2),
-
- FOREIGN KEY (order_id) REFERENCES orders(id),
- FOREIGN KEY (product_id) REFERENCES products(id)
-
+    FOREIGN KEY (order_id)   REFERENCES orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 
--- //=========================TABLA PAGOS ================
-CREATE TABLE payments(
+-- ================== PAGOS ==================
+CREATE TABLE payments (
+    id       SERIAL PRIMARY KEY,
+    order_id INT,
+    metodo   VARCHAR(50),
+    estado   VARCHAR(50),
+    fecha    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- order_id INT,
- metodo VARCHAR(50),
- estado VARCHAR(50),
- fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
- FOREIGN KEY (order_id) REFERENCES orders(id)
-
+    FOREIGN KEY (order_id) REFERENCES orders(id)
 );
 
 
--- //=========================TABLA RESEÑAS ================
-CREATE TABLE reviews(
+-- ================== RESEÑAS ==================
+CREATE TABLE reviews (
+    id         SERIAL PRIMARY KEY,
+    user_id    INT,
+    product_id INT,
+    rating     INT,
+    comentario TEXT,
+    fecha      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
- id INT AUTO_INCREMENT PRIMARY KEY,
- user_id INT,
- product_id INT,
- rating INT,
- comentario TEXT,
- fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
- FOREIGN KEY (user_id) REFERENCES users(id),
- FOREIGN KEY (product_id) REFERENCES products(id)
-
+    FOREIGN KEY (user_id)    REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
