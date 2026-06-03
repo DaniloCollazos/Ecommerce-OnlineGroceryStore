@@ -1,31 +1,27 @@
 <?php
-
-/**
- * Carga manual del archivo .env
- */
-
 function loadEnv($path)
 {
+    // Si no existe .env (producción), no hacer nada
+    // Las variables ya están inyectadas por Render
     if (!file_exists($path)) {
-        throw new Exception("Archivo .env no encontrado");
+        return;
     }
 
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
     foreach ($lines as $line) {
-        // Ignorar comentarios
-        if (str_starts_with(trim($line), '#')) {
-            continue;
-        }
+        if (str_starts_with(trim($line), '#')) continue;
+        if (!str_contains($line, '=')) continue;
 
-        // Separar clave=valor
         [$key, $value] = explode('=', $line, 2);
-
-        $key = trim($key);
+        $key   = trim($key);
         $value = trim($value);
 
-        // Guardar en $_ENV y $_SERVER
-        $_ENV[$key] = $value;
-        $_SERVER[$key] = $value;
+        // ✅ NO pisar variables que ya existen en el entorno (las de Render)
+        if (!array_key_exists($key, $_ENV) && getenv($key) === false) {
+            $_ENV[$key]    = $value;
+            $_SERVER[$key] = $value;
+            putenv("$key=$value");
+        }
     }
 }
