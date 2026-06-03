@@ -1,4 +1,4 @@
-USE ecommerce_online_grocery_store;
+-- Nota: Asegúrate de estar conectado a la base de datos 'ecommerce_online_grocery_store' antes de ejecutar.
 
 -- ================== ROLES ==================
 INSERT INTO roles (id, nombre) VALUES
@@ -47,16 +47,16 @@ INSERT INTO providers (nombre, telefono, direccion) VALUES
 
 -- ================== PRODUCTS (GRANOS) ==================
 INSERT INTO products (nombre, descripcion, categoria_id, marca_id, proveedor_id, precio_costo, precio, stock) VALUES
-('Café Molido Premium 500g', 'Café colombiano tostado medio', 1, 1, 1, 12000, 18000, 40),
-('Café en Grano 1kg', 'Grano entero para moler', 1, 1, 2, 20000, 28000, 25),
-('Arroz Blanco 1kg', 'Arroz tipo exportación', 2, 3, 3, 2500, 4000, 100),
-('Arroz Integral 1kg', 'Arroz integral saludable', 2, 4, 3, 3000, 4500, 80),
-('Lentejas 500g', 'Lentejas seleccionadas', 3, 2, 4, 1800, 3000, 70),
-('Frijol Rojo 500g', 'Frijol cargamanto', 3, 2, 4, 2000, 3500, 60),
-('Avena en Hojuelas 400g', 'Avena natural', 4, 5, 5, 1500, 2800, 90),
-('Quinua 500g', 'Grano andino premium', 5, 5, 2, 6000, 9000, 30),
-('Maíz Pira 500g', 'Para crispetas', 4, 3, 1, 1200, 2500, 85),
-('Garbanzos 500g', 'Alta calidad', 3, 2, 4, 2200, 3600, 65);
+('Café Molido Premium 500g', 'Café colombiano tostado medio', 1, 1, 1, 12000.00, 18000.00, 40),
+('Café en Grano 1kg', 'Grano entero para moler', 1, 1, 2, 20000.00, 28000.00, 25),
+('Arroz Blanco 1kg', 'Arroz tipo exportación', 2, 3, 3, 2500.00, 4000.00, 100),
+('Arroz Integral 1kg', 'Arroz integral saludable', 2, 4, 3, 3000.00, 4500.00, 80),
+('Lentejas 500g', 'Lentejas seleccionadas', 3, 2, 4, 1800.00, 3000.00, 70),
+('Frijol Rojo 500g', 'Frijol cargamanto', 3, 2, 4, 2000.00, 3500.00, 60),
+('Avena en Hojuelas 400g', 'Avena natural', 4, 5, 5, 1500.00, 2800.00, 90),
+('Quinua 500g', 'Grano andino premium', 5, 5, 2, 6000.00, 9000.00, 30),
+('Maíz Pira 500g', 'Para crispetas', 4, 3, 1, 1200.00, 2500.00, 85),
+('Garbanzos 500g', 'Alta calidad', 3, 2, 4, 2200.00, 3600.00, 65);
 
 -- ================== PRODUCT IMAGES ==================
 INSERT INTO product_images (product_id, url) VALUES
@@ -86,7 +86,7 @@ INSERT INTO inventory (product_id, stock_actual, stock_minimo) VALUES
 
 -- ================== CARTS ==================
 INSERT INTO carts (user_id) VALUES
-(1),(2),(3),(4),(1);
+(1), (2), (3), (4), (1);
 
 -- ================== CART ITEMS ==================
 INSERT INTO cart_items (cart_id, product_id, cantidad) VALUES
@@ -98,19 +98,19 @@ INSERT INTO cart_items (cart_id, product_id, cantidad) VALUES
 
 -- ================== ORDERS ==================
 INSERT INTO orders (user_id, total, estado) VALUES
-(1, 36000, 'pendiente'),
-(2, 28000, 'pagado'),
-(3, 9000, 'enviado'),
-(4, 2500, 'entregado'),
-(1, 45000, 'pendiente');
+(1, 36000.00, 'pendiente'),
+(2, 28000.00, 'pagado'),
+(3, 9000.00, 'enviado'),
+(4, 2500.00, 'entregado'),
+(1, 45000.00, 'pendiente');
 
 -- ================== ORDER ITEMS ==================
 INSERT INTO order_items (order_id, product_id, cantidad, precio) VALUES
-(1, 1, 2, 18000),
-(2, 2, 1, 28000),
-(3, 5, 3, 3000),
-(4, 9, 1, 2500),
-(5, 3, 5, 4000);
+(1, 1, 2, 18000.00),
+(2, 2, 1, 28000.00),
+(3, 5, 3, 3000.00),
+(4, 9, 1, 2500.00),
+(5, 3, 5, 4000.00);
 
 -- ================== PAYMENTS ==================
 INSERT INTO payments (order_id, metodo, estado) VALUES
@@ -127,3 +127,7 @@ INSERT INTO reviews (user_id, product_id, rating, comentario) VALUES
 (3, 3, 3, 'Normal'),
 (4, 4, 5, 'Muy saludable'),
 (1, 5, 4, 'Buena calidad');
+
+-- ================== AJUSTE DE SECUENCIAS ==================
+-- Esto evita que falle el SERIAL de roles tras insertar IDs manualmente
+SELECT setval('roles_id_seq', (SELECT MAX(id) FROM roles));
