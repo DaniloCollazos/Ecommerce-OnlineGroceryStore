@@ -5,7 +5,7 @@
  * Provee métodos utilitarios compartidos que todos los controllers heredan.
  */
 
-require_once __DIR__ . '/../Config/Database.php';
+require_once __DIR__ . '/../Config/database.php';
 
 class Controller {
 
